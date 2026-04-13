@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WSI Tile Viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/5.0.1/openseadragon.min.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">WSI Segmentation Review</div>
+    <div class="controls">
+      <label>
+        Model
+        <select id="modelSelect">
+          <option value="hovernet">HoVer-Net</option>
+          <option value="promptnucseg">PromptNuSeg</option>
+        </select>
+      </label>
+      <label id="checkpointWrap">
+        Checkpoint
+        <select id="checkpointSelect"></select>
+      </label>
+      <label>
+        Cohort
+        <select id="cohortSelect">
+          <option value="all">All</option>
+          <option value="cervical">Cervical</option>
+          <option value="ovary">Ovary</option>
+        </select>
+      </label>
+      <label>
+        Slide
+        <select id="slideSelect"></select>
+      </label>
+      <label class="toggle">
+        <input type="checkbox" id="overlayToggle" checked />
+        Overlay
+      </label>
+      <label>
+        Overlay Mode
+        <select id="overlayModeSelect">
+          <option value="outline">Outline</option>
+          <option value="blend">Blend</option>
+          <option value="high-contrast">High Contrast</option>
+        </select>
+      </label>
+      <label>
+        Opacity
+        <div class="rangeWrap">
+          <input type="range" id="overlayOpacity" min="0" max="100" value="82" />
+          <span id="overlayOpacityValue">82%</span>
+        </div>
+      </label>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="panel left">
+      <h3>Summary</h3>
+      <div id="summary"></div>
+      <h3>Cell Counts</h3>
+      <div id="classCounts"></div>
+      <h3>Legend</h3>
+      <div id="legend"></div>
+      <div class="tip">Tip: zoom with mouse wheel, drag to pan.</div>
+    </aside>
+
+    <section class="viewerSection">
+      <div id="viewer"></div>
+      <canvas id="overlayCanvas"></canvas>
+      <div id="statusPill">Loading...</div>
+    </section>
+  </main>
+
+  <script src="./config.js"></script>
+  <script src="./viewer.js"></script>
+</body>
+</html>
